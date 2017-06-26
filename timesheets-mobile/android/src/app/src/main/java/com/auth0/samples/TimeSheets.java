@@ -22,6 +22,6 @@ public class TimeSheets extends Activity {
     }
 
     private void createEntry() {
-        
+
     }
 }

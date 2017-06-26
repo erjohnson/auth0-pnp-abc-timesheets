@@ -33,6 +33,16 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".TimeSheets">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:host="@string/api_domain" />
+            </intent-filter>
+        </activity>
+
+
 
 
     </application>
