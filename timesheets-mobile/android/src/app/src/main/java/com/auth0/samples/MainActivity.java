@@ -78,7 +78,10 @@ public class MainActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                token.setText("Logged in: " + credentials.getAccessToken());
+//                                token.setText("Logged in: " + credentials.getAccessToken());
+                                Intent intent = new Intent(MainActivity.this, TimeSheets.class);
+                                intent.putExtra("token", credentials.getAccessToken());
+                                startActivity(intent);
                             }
                         });
                     }
