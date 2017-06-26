@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.squareup.okhttp.OkHttpClient;
+
 /**
  * Created by ej on 6/26/17.
  */
@@ -13,6 +15,7 @@ import android.widget.TextView;
 public class TimeSheets extends Activity {
 
     private TextView token;
+    private OkHttpClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,7 @@ public class TimeSheets extends Activity {
     }
 
     private void getEntries() {
-
+        
     }
 
     private void createEntry() {
