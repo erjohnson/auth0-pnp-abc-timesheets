@@ -21,7 +21,7 @@
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/createEntry"
+        android:id="@+id/btCreateEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.18"

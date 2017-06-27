@@ -23,10 +23,12 @@ public class TimeSheets extends Activity {
     private TextView token;
     private OkHttpClient client;
 
-    @Override
+    @Override`
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_sheets);
+        Button btCreateEntry = (Button) findViewById(R.id.btCreateEntry);
+        btCreateEntry.setOnClickListener(new OnClickListenerCreateEntry());
         token = (TextView) findViewById(R.id.token);
         token.setText(getIntent().getStringExtra("token"));
     }
