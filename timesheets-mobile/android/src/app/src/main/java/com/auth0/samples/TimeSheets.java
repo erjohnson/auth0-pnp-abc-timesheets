@@ -28,20 +28,19 @@ public class TimeSheets extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_sheets);
         Button btCreateEntry = (Button) findViewById(R.id.btCreateEntry);
-        btCreateEntry.setOnClickListener(new OnClickListenerCreateEntry());
         token = (TextView) findViewById(R.id.token);
         token.setText(getIntent().getStringExtra("token"));
     }
 
-    private String getEntries() throws IOException {
-        Request request = new Request.Builder()
-                .url(getString(R.string.api_domain))
-                .build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
-    }
-
-    private void createEntry() {
-
-    }
+//    private String getEntries() throws IOException {
+//        Request request = new Request.Builder()
+//                .url(getString(R.string.api_domain))
+//                .build();
+//        Response response = client.newCall(request).execute();
+//        return response.body().string();
+//    }
+//
+//    private void createEntry() {
+//
+//    }
 }
