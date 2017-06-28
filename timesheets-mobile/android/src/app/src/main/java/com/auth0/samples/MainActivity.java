@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +17,11 @@ import com.auth0.android.authentication.AuthenticationException;
 import com.auth0.android.provider.AuthCallback;
 import com.auth0.android.provider.WebAuthProvider;
 import com.auth0.android.result.Credentials;
+
+import java.security.MessageDigest;
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lbalmaceda on 5/10/17.
@@ -50,8 +56,26 @@ public class MainActivity extends Activity {
     private void login() {
         Auth0 auth0 = new Auth0(getString(R.string.auth0_client_id), getString(R.string.auth0_domain));
         auth0.setOIDCConformant(true);
+
+        SecureRandom sr = new SecureRandom();
+        byte[] code = new byte[32];
+        sr.nextBytes(code);
+        String verifier = Base64.encodeToString(code, Base64.URL_SAFE | Base64.NO_WRAP | Base64.NO_PADDING);
+
+        byte[] bytes = verifier.getBytes("US-ASCII");
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(bytes, 0, bytes.length);
+        byte[] digest = md.digest();
+        String challenge = Base64.encodeToString(digest, Base64.URL_SAFE | Base64.NO_WRAP | Base64.NO_PADDING);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("audience", "https://api.abcinc.com/timesheets");
+        params.put("code_challenge", challenge);
+        params.put("code_challenge_method", "RS256");
+
         WebAuthProvider.init(auth0)
                 .withScheme("demo")
+                .withConnectionScope("create:timesheets", "read:timesheets")
                 .start(MainActivity.this, new AuthCallback() {
                     @Override
                     public void onFailure(@NonNull final Dialog dialog) {
@@ -78,7 +102,6 @@ public class MainActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-//                                token.setText("Logged in: " + credentials.getAccessToken());
                                 Intent intent = new Intent(MainActivity.this, TimeSheets.class);
                                 intent.putExtra("token", credentials.getAccessToken());
                                 startActivity(intent);
