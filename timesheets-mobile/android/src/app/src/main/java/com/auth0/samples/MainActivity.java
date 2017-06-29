@@ -87,6 +87,7 @@ public class MainActivity extends Activity {
 
         WebAuthProvider.init(auth0)
                 .withScheme("demo")
+                .withParameters(params)
                 .withConnectionScope("create:timesheets", "read:timesheets")
                 .start(MainActivity.this, new AuthCallback() {
                     @Override

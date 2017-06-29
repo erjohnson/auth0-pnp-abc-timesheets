@@ -35,8 +35,8 @@ public class TimeSheets extends Activity {
         setContentView(R.layout.time_sheets);
 
         Button btCreateEntry = (Button) findViewById(R.id.btCreateEntry);
-        token = (TextView) findViewById(R.id.token);
-        token.setText(getIntent().getStringExtra("token"));
+//        token = (TextView) findViewById(R.id.token);
+//        token.setText(getIntent().getStringExtra("token"));
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
         try {
