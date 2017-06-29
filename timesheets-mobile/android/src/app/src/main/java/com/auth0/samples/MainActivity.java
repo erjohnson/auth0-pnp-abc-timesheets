@@ -82,8 +82,9 @@ public class MainActivity extends Activity {
 
         Map<String, Object> params = new HashMap<>();
         params.put("audience", "https://api.abcinc.com/timesheets");
+        params.put("response_type", "code");
         params.put("code_challenge", challenge);
-        params.put("code_challenge_method", "RS256");
+        params.put("code_challenge_method", "S256");
 
         WebAuthProvider.init(auth0)
                 .withScheme("demo")
