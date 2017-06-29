@@ -111,6 +111,7 @@ public class MainActivity extends Activity {
 
                     @Override
                     public void onSuccess(@NonNull final Credentials credentials) {
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

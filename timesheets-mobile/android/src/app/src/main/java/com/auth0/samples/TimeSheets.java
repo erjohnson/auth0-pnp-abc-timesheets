@@ -37,7 +37,6 @@ public class TimeSheets extends Activity {
         Button btCreateEntry = (Button) findViewById(R.id.btCreateEntry);
         token = (TextView) findViewById(R.id.token);
         token.setText(getIntent().getStringExtra("token"));
-
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
         try {
@@ -50,6 +49,7 @@ public class TimeSheets extends Activity {
     public void run() throws Exception {
         Request request = new Request.Builder()
                 .url(getString(R.string.api_domain) + "/timesheets")
+                .addHeader("Authorization", "Bearer " + getIntent().getStringExtra("token"))
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
